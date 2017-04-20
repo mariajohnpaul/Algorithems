@@ -13,161 +13,116 @@ public class Solution {
         
         Scanner sc = new Scanner(System.in);
         
-        int t = sc.nextInt();
         
-        while(t-->0)
+        TreeSet <Point> setinp = new TreeSet<>(new zcomp());
+        
+        int T=sc.nextInt();
+        int b=sc.nextInt();
+        while(T-->0)
             {
-            BigInteger  n=sc.nextBigInteger();
-            BigInteger  k= sc.nextBigInteger();
-            BigInteger b= sc.nextBigInteger();
-            BigInteger mid=BigInteger.ZERO;
-            BigInteger max =BigInteger.ZERO;
-            
-            
-            n.compareTo(b);
-            if(n.compareTo(b) == -1)
-                  {
-               System.out.println("-1");
-               continue;
-           }
-/*            if(n.mod(b) != BigInteger.ZERO)
-                {
-            	
-            mid	= n.divide(b).add(((n.mod(b)).divide(BigInteger.valueOf(2))));
-            //mid = n/b+((n%b)/2);
-            }else*/
-                {
-                 mid = n.divide(b);
-            }
-            
-            
-            //System.out.println(mid);
-            
-            	max= mid.add(b.divide(BigInteger.valueOf(2)));
-      
-                //max = mid+(b/2);
-            
-                
-           //System.out.println(max);
-            //if(b%2!=0)max=max+1;
-           if( max.compareTo(k) == 1 )
-               {
-              System.out.println("-1");
-               continue;
-           }
-           
-           //BigInteger calc = ((b.multiply(b.add(BigInteger.ONE))).divide(BigInteger.valueOf(2)));
-           //System.out.println(calc);
-           
-           	if(((b.multiply(b.add(BigInteger.ONE))).divide(BigInteger.valueOf(2))).compareTo(n) == 1)
-              //if( b*(b+1)/2 > n)
-               {
-               System.out.println("-1");
-               continue;
-           }
-            
-           // long []arr = new long[b];
-            
-            BigInteger sum= BigInteger.ZERO;
-            BigInteger diff= BigInteger.ZERO;
-            
-            //Fill the elements
-            for(BigInteger i= b;i.compareTo(BigInteger.ZERO) != -1;i=i.subtract(BigInteger.ONE))
-            //for(long i=b-1;i>=0;i--)11
-                {
-                
-                //arr[i]=max-i;
-                //sum+=arr[i];
-                sum = sum.add(max.subtract(i));
-                //sum += max-i;
-                //if(arr[i]+diff < k)
-               //System.out.print(arr[i]+" ");
-            }
-            System.out.println(sum);
-            if(sum!=n)
-                {
-            	diff = n.subtract(sum);
-               // diff=sum-n;
-            }
-                     System.out.println(max);
-                     System.out.println(diff);
-
-            //Fill the elements
-            String s = "";
-            if(diff.compareTo(BigInteger.ZERO)!= -1)
-            {
-            for(BigInteger i= b;i.compareTo(BigInteger.ZERO) != 0;i=i.subtract(BigInteger.ONE))    
-            //for(long i=b-1;i>=0 ;i--)
-                {
-                BigInteger value = BigInteger.ZERO;
-                if(diff.compareTo(BigInteger.ZERO) == 1)
-                    {
-                    //value = max.subtract(i).subtract(BigInteger.ONE);
-                	value = max.add(BigInteger.ONE);
-                	//value = max-i -1;
-                }else
-                    {
-                    //value = max-i;
-                	value = max;
-                }
-                //arr[i]=arr[i]-1;
-                //sum+=arr[i];
-                diff = diff.subtract(BigInteger.ONE);
-                max = max.subtract(BigInteger.ONE);
-                //diff--;
-                //if(arr[i]+diff < k)
-                if(i.compareTo(BigInteger.ONE) != 0)
-                //if(i!=0)
-                    {
-                //System.out.print(value+" ");
-                    s+=value+" ";
-                }else{
-                    //System.out.print(value);
-                    s+=value;
-                }
-            }
-            }else
-            {
-            	for(BigInteger i= b;i.compareTo(BigInteger.ZERO) != 0;i=i.subtract(BigInteger.ONE))    
-                    //for(long i=b-1;i>=0 ;i--)
-                        {
-                        BigInteger value = BigInteger.ZERO;
-                        if(diff.compareTo(BigInteger.ZERO) == 1)
-                            {
-                            //value = max.subtract(i).subtract(BigInteger.ONE);
-                        	value = max.subtract(BigInteger.ONE);
-                        	//value = max-i -1;
-                        }else
-                            {
-                            //value = max-i;
-                        	value = max;
-                        }
-                        //arr[i]=arr[i]-1;
-                        //sum+=arr[i];
-                        diff = diff.add(BigInteger.ONE);
-                        max = max.subtract(BigInteger.ONE);
-                        //diff--;
-                        //if(arr[i]+diff < k)
-                        if(i.compareTo(BigInteger.ONE) != 0)
-                        //if(i!=0)
-                            {
-                        //System.out.print(value+" ");
-                            s+=value+" ";
-                        }else{
-                            //System.out.print(value);
-                            s+=value;
-                        }
-                    }
-            }
-            
-            
-            /* for(int i=b-1;i>=0;i--)
-                {
-                 System.out.print(arr[i]+" ");
-             }*/
-    
-            System.out.println(s);
+            int k= sc.nextInt();
+            double x = sc.nextDouble();
+            double y = sc.nextDouble();
+            double z = sc.nextDouble();
+setinp.add(new Point(k,x,y,z));
+        }
+        
+        Map <Integer,Point> newmap = new HashMap<>();
+        
+        Iterator it = setinp.iterator();
+        int buc = b;
+        while(it.hasNext()){
+            if(buc--<=0)break;
+            Point in = (Point)it.next();
+            //System.out.println(in.k);
+            newmap.put(in.k,in);
+            it.remove();
+            //Point tmp = in;
+            //setinp.remove(tmp);
             
         }
-    }
+     
+        
+        sc.nextLine();
+        
+        while(sc.hasNextLine())
+            {
+            String q = sc.nextLine();
+            //System.out.println(q);
+            char C = q.contains("F")||q.contains("f") ?  'F' : 'R';
+            String keys = q.substring(2);
+            
+            int key = Integer.parseInt(keys);
+            //System.out.println(key);
+            if(C=='F')
+                {
+            if(newmap.containsKey(key))
+                {
+                Point value = newmap.get(key);
+                BigDecimal bx= new BigDecimal(value.x);
+                bx = bx.setScale(3,BigDecimal.ROUND_HALF_UP);
+                BigDecimal by= new BigDecimal(value.y);
+                by = by.setScale(3,BigDecimal.ROUND_HALF_UP);
+                BigDecimal bz= new BigDecimal(value.z);
+                bz = bz.setScale(3,BigDecimal.ROUND_HALF_UP);
+                
+                System.out.print(key+" = (");
+                System.out.printf("%.3f,%.3f,%.3f)\n",bx,by,bz);
+                
+            }else
+                {
+                System.out.println("Point doesn't exist in the bucket.");
+            }
+            }else
+                {
+                if(setinp.isEmpty() && newmap.containsKey(key))
+                    {
+                    System.out.println("No more points can be deleted.");
+                    continue;
+                }else if(newmap.containsKey(key))
+                    {
+                    newmap.remove(key);
+                    System.out.println("Point id "+key+" removed.");
+                    Point tmp = setinp.pollFirst();
+                    
+                    newmap.put(tmp.k,tmp);
+                }else
+                    {
+                    System.out.println("Point doesn't exist in the bucket.");
+                }
+            }
+            
+        }
+        
+    }   
+
 }
+    class Point{
+            int k;
+            double x;
+            double y;
+            double z;
+            Point(int ki,double xi,double yi,double zi)
+                {
+                k=ki;
+                x=xi;
+                y=yi;
+                z=zi;
+            }
+        }
+        
+         class zcomp implements Comparator<Point>{
+ 
+    @Override
+    public int compare(Point e1, Point e2) {
+        int ret=0;
+            if(e1.z > e2.z){
+            ret = -1;
+        }else if(e1.z < e2.z)
+            {
+            ret = 1;
+        }
+            
+        return ret;
+    }
+         }
